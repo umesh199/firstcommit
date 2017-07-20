@@ -1,0 +1,24 @@
+---
+- hosts: web
+  become: yes
+  vars:
+     passwd: 12345678
+  tasks:
+  - name: Create user ccount
+    user:
+      name: "{{ item.name }}"
+    with_items:
+      - { name: 'testuser8', groups: 'ftp', uid: '10010', passwd: '{{passwd}}' }
+      - { name: 'testuser9', groups: 'root', uid: '10012', comment: 'created from asible' }
+  - name: creating groups
+    group: 
+       name: grp1
+
+
+
+
+
+
+
+
+

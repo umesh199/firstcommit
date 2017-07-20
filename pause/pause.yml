@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: install apache on all systms
+    action: yum name=httpd state=absent
+  - name: Pause to check  installed or not 
+    pause:
+      prompt: "Make sure the instalation complete ................"
+
+    

@@ -1,0 +1,6 @@
+--- #Demo Copy command 
+- hosts: all 
+  become: yes
+  tasks: 
+  - name: Copy files to all systems
+    copy: src=file1 dest=/home/ansible

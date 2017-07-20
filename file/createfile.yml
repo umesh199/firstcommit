@@ -1,0 +1,11 @@
+---
+- hosts: web
+  become: yes
+  tasks:
+  - name: crete a file nd assign permission 
+    file:
+     state: touch 
+     path: /home/ansible/test1
+
+     
+

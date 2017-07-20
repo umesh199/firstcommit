@@ -1,0 +1,6 @@
+--- #Demo cron Module
+- hosts: local
+  user: ansible
+  tasks:
+  - name: Setting up cron
+    cron: name="list of files" minute="0" hour="1" job="ls -al /etc > /home/ansible/cronout"

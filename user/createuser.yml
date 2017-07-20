@@ -1,0 +1,13 @@
+---
+- hosts: web
+  become: yes
+  tasks:
+  - name: Create user ccount
+    user:
+      name: test2
+      comment: ansible
+      uid: 1005
+
+
+
+

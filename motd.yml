@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+     - shell: cat /etc/motd
+       register: motd_contents  
+     - debug: msg="stdout={{motd_contents}}"
+     - debug: msg="This system belongs to umesh"
+       when: motd_contents.stdout == ""

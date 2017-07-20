@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    time1: server 0.centos.pool.ntp.org iburst
+    time2: server 1.centos.pool.ntp.org iburst
+    time3: server 2.centos.pool.ntp.org iburst
+    time4: server 4.centos.pool.ntp.org iburst
+  tasks:
+  - name: Configurig chrony from templete
+    template: src=chrony.j2 dest=/etc/chrony.conf
+  - name: Restart chronyd
+    service:  
+      name: chronyd 
+      state: restarted 
+      enabled: yes

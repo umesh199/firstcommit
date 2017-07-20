@@ -1,0 +1,11 @@
+---
+- hosts: test
+  tasks:
+  - name: Install Apache on test systems
+    yum: pkg=httpd state=installed 
+    notify: restart httpd
+    
+  handlers:
+    - name: restart httpd 
+      service: name=httpd state=restarted
+    
