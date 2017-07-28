@@ -1,26 +1,26 @@
 ---
 - hosts: test
   tasks:
-   - name: crete a file nd assign permission 
+  - name: crete a file nd assign permission 
     file:
-     state: touch 
-     path: /home/ansible/test1
+    state: touch 
+    path: /home/ansible/test1
   - name: Implement ACL on host group test
     acl:
-      path: /home/ansible/test1
-      entity: ansible
-      etype: user
-      permissions: r
-      state: present 
-      register: acl_info
+    path: /home/ansible/test1
+    entity: ansible
+    etype: user
+    permissions: r
+    state: present 
+    register: acl_info
   - name: Implement ACL on host group test
     acl:
-      path: /home/ansible/test1
-      entity: grp1
-      etype: group
-      permissions: rw
-      state: present 
-      register: acl_info
+    path: /home/ansible/test1
+    entity: grp1
+    etype: group
+    permissions: rw
+    state: present 
+    register: acl_info
       
      
   
