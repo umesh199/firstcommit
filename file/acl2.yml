@@ -1,13 +1,13 @@
 ---
 - hosts: test
   become: yes
-  var: 
-    file_name: file1 file2 file3 file4 file5
+  vars: 
+      file_name: file1 file2 file3 file4 file5
   tasks:
   - name: crete a file nd assign permission 
     file:
       state: touch 
-      path: /home/ansible/test6
+      path: /home/ansible/{{ file_name }}
   - name: Creat user 
     user:
       name: user1
@@ -15,14 +15,14 @@
 
   - name: Implement ACL on host group test
     acl:
-      path: /home/ansible/test6
+      path: /home/ansible/{{ file_name }}
       entity: user2
       etype: user
       permissions: rw
       state: present 
     register: acl_info
   - name: Get facl command
-    command: getfacl /home/ansible/test6
+    command: getfacl /home/ansible/{{ file_name }}
     register: result
   - name: Create group
     group:
@@ -30,7 +30,7 @@
       state: present
   - name: Implement ACL on host group test
     acl:
-      path: /home/ansible/test6
+      path: /home/ansible/{{ file_name }}
       entity: grp4
       etype: group
       permissions: rw
