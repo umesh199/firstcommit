@@ -9,8 +9,8 @@
   tasks:
   - name: fetch file from remote hosts
     fetch:
-      src: /etc/host.conf
-      dest: /home/ansible/prefix-{{ inventory_hostname }}
+      src: /etc/hosts
+      dest: /home/ansible/prefix1-{{ inventory_hostname }}
        
        
        ########Allows you to override the default behavior of appending hostname/path/to/file to the destination. 
