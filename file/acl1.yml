@@ -1,0 +1,12 @@
+---
+- hosts: test
+  tasks:
+  - name: Implement ACL on host group test
+    acl:
+      path: /etc/foo.conf
+      entity: joe
+      etype: user
+      permissions: r
+      state: present 
+     
+  
