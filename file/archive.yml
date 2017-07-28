@@ -1,0 +1,17 @@
+---
+- hosts: test
+  become: yes
+  
+  tasks:
+  - name: archive home directory 
+    archive:
+      path: /home/ansible
+      dest: /home/ansible_home.tgz
+  - name: Compress inthe form of ZIP formate
+    archive: 
+      path:
+          - /home/ansible
+          - /opt/scripts
+      dest: /home/ansible/ansible.tar.bz2
+       
+       
