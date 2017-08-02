@@ -1,0 +1,53 @@
+---
+
+- name: Deploy VM windows from template and customize
+  vmware_guest:
+    hostname: "{{ vc_hostname }}" #Defined on vars/mail.yml
+    username: "{{ vc_username }}" #Defined on vars/mail.yml
+    password: "{{ vc_password }}" #Defined on vars/mail.yml
+    validate_certs: no
+    datacenter: "{{ item.vc_datacenter }}"
+    folder: "{{ item.vc_folder }}"
+    cluster: "{{ item.vc_cluster }}"
+    name: "{{ item.vm_name }}"
+    annotation: "{{ item.vc_note }}"
+    state: poweredon
+    disk:
+    - size_gb: "{{ item.vm_disksize}}"
+      type: thin
+      datastore: "{{ item.vm_datastore }}"
+    hardware:
+       memory_mb: "{{ item.vm_memory }}"
+       num_cpus: "{{ item.vm_cpu }}"
+       scsi: paravirtual
+    template: "{{ vm_template }}" #Defined on vars/mail.yml
+    networks:
+    - name: "{{ item.vm_networkportgroup }}"
+      ip: "{{ item.vm_ip }}"
+      netmask: "{{ item.vm_networkmask }}"
+      gateway: "{{ item.vm_networkgw }}"
+   #   mac: 'aa:bb:dd:aa:00:14'
+  #    domain: ncorafmacion.local
+  #    dns_servers:
+  #    - 192.168.6.100
+  #    - 192.168.6.101
+    customization:
+      autologon: true
+      dns_servers:
+      - "{{ item.vm_networkdns1 }}"
+      - "{{ item.vm_networkdns2 }}"
+      dns_suffix: "{{ dc_domain}}" #Defined on vars/mail.yml
+      joindomain: "{{ dc_domain }}" #Defined on vars/mail.yml
+      domainadmin: "{{ dc_domainadmin }}" #Defined on vars/mail.yml
+      domainadminpassword: "{{ dc_domainadminpass }}" #Defined on vars/mail.yml
+      domain: "{{ dc_domain }}" #Defined on vars/mail.yml
+      password: "{{ localadminpass }}" #Defined on vars/mail.yml
+  #    runonce:
+  #    - powershell.exe -ExecutionPolicy Unrestricted -File C:\Windows\Temp\Enable-WinRM.ps1 -ForceNewSSLCert
+  delegate_to: localhost
+##
+##Insert down the variables for each VM to deploy
+##
+  with_items:
+    - { vm_name: x100, vm_ip: 10.0.0.100, vc_datacenter: VDC, vc_folder: /MIQUEL, vc_cluster: Cluster-EVC, vc_note: Created by Ansible, vm_datastore: FORM01_R5_LUN75, vm_networkportgroup: VLAN6_Formacion, vm_networkdns1: 192.168.6.100, vm_networkdns2: 192.168.6.101, vm_networkmask: 255.255.255.0, vm_networkgw: 192.168.6.1, vm_memory: 4096, vm_cpu: 4, vm_disksize: 20 }
+ 

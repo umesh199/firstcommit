@@ -1,0 +1,15 @@
+---
+# vars file for vSphereVM
+
+
+vc_hostname: 192.168.6.10
+vc_username: administrator@vsphere.local
+vc_password: Secret123!
+
+vm_template: miquel-template-W2012R2-Std-ES
+
+dc_domain: ncoraformacion.local
+dc_domainadmin: administrador@ncoraformacion.local
+dc_domainadminpass: Secret123!
+
+localadminpass: Secret123!

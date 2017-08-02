@@ -1,0 +1,18 @@
+---
+
+- hosts: ansible
+  user: root
+  tasks:
+     - name: Ensure that role are up to date
+       command: ansible-galaxy install --force {{ item }}
+       with_items:
+          - miquelMariano.vSphereVM
+       when:
+          - update_mode | default(False)
+       tags: update
+       ignore_errors: yes
+
+- hosts: ansible
+  user: root
+  roles:
+     - role: miquelMariano.vSphereVM

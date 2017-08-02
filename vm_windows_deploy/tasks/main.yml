@@ -1,0 +1,5 @@
+---
+# tasks file for vSphereVM
+
+- include: deploy-customize-win.yml
+  tags: deploy-win
