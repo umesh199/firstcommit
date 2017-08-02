@@ -1,8 +1,9 @@
 ---
 - hosts: test
   become: yes
-  var: 
-    file_name: file1 file2 file3 file4 file5
+  
+
+
   tasks:
   - name: crete a file nd assign permission 
     file:
